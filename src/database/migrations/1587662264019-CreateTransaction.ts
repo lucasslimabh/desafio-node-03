@@ -5,7 +5,7 @@ export default class CreateTransaction1587662264019
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'transaction',
+        name: 'transactions',
         columns: [
           {
             name: 'id',
@@ -24,12 +24,14 @@ export default class CreateTransaction1587662264019
           },
           {
             name: 'value',
-            type: 'int',
+            type: 'decimal',
+            precision: 10,
+            scale: 2,
           },
           {
             name: 'category_id',
             type: 'uuid',
-            isNullable: false,
+            isNullable: true,
           },
           {
             name: 'created_at',
@@ -38,7 +40,7 @@ export default class CreateTransaction1587662264019
           },
           {
             name: 'updated_at',
-            type: 'varchar',
+            type: 'timestamp',
             default: 'now()',
           },
         ],
@@ -47,6 +49,6 @@ export default class CreateTransaction1587662264019
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('transaction');
+    await queryRunner.dropTable('transactions');
   }
 }

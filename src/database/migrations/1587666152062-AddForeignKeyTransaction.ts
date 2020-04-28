@@ -4,12 +4,12 @@ export default class AddForeignKeyTransaction1587666152062
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createForeignKey(
-      'transaction',
+      'transactions',
       new TableForeignKey({
-        name: 'fk_transaction_category',
+        name: 'fk_transactions_categories',
         columnNames: ['category_id'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'category',
+        referencedTableName: 'categories',
         onDelete: 'SET NULL',
         onUpdate: 'CASCADE',
       }),
@@ -17,6 +17,9 @@ export default class AddForeignKeyTransaction1587666152062
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('transaction', 'fk_transaction_category');
+    await queryRunner.dropForeignKey(
+      'transactions',
+      'fk_transactions_categories',
+    );
   }
 }
